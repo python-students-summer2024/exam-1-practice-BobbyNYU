@@ -7,28 +7,75 @@ Rather, call whichever functions defined in this file that you want to run from 
 
 import random
 
-##--------------------- Function #1 ---------------------##
-# Define a function named 'get_random_int'.  
-# This function accepts two arguments: a minimum value and a maximum value.
-# The function must return a random integer between these two values, inclusive.
-# Use the function random.randint() to generate the pseudo-random number.
+import random
+
+def get_random_int(min_val, max_val):
+    """
+    Returns a random integer between min_val and max_val (inclusive).
+    
+    Args:
+        min_val (int): The minimum value for the random integer.
+        max_val (int): The maximum value for the random integer.
+        
+    Returns:
+        int: A random integer between min_val and max_val (inclusive).
+    """
+    return random.randint(min_val, max_val)
+
+def get_guess(max_val):
+    """
+    Prompts the user to guess a random integer between 1 and max_val (inclusive).
+    
+    Args:
+        max_val (int): The maximum value for the random integer.
+        
+    Returns:
+        int or bool: -1 if the user's input is invalid, True if the user guesses correctly,
+                     False if the user guesses incorrectly.
+    """
+    # Generate a random integer between 1 and max_val (inclusive)
+    random_int = get_random_int(1, max_val)
+    
+    # Prompt the user to guess the random integer
+    guess = input(f"Guess an integer between 1 and {max_val}: ")
+    
+    # Check if the user's input is a valid integer within the range
+    try:
+        guess_int = int(guess)
+        if 1 <= guess_int <= max_val:
+            # Compare the user's guess with the random integer
+            if guess_int == random_int:
+                return True
+            else:
+                return False
+        else:
+            # User's input is out of range
+            return -1
+    except ValueError:
+        # User's input is not an integer
+        return -1
 
 
-##--------------------- Function #2 ---------------------##
-# Define a function named 'get_guess'.
-# This function accepts a single argument - an integer that serves as a max value.
-# This function asks the user once to guess a random integer between 1 and the max value, inclusive.
-# The function calls the function named get_random_int in order to generate the random integer in this range.
-# If the user has entered an invalid response (i.e. anything that is not an integer in this range), the function returns an integer, -1.
-# If the user has guessed the random integer correctly, this function returns a boolean True.
-# If the user has guessed incorrectly, this function returns a boolean False.
+def play_game():
+    """
+    Plays a game where the user guesses 4 random integers between 1 and 5.
+    Prints the percentage of correct guesses at the end.
+    """
+    max_val = 5
+    num_guesses = 4
+    correct_guesses = 0
 
+    for _ in range(num_guesses):
+        guess_result = get_guess(max_val)
 
-##--------------------- Function #3 ---------------------##
-# Define a function named 'play_game'.
-# This function does not accept any arguments.
-# This function uses the get_guess function to ask the user four times to guess a random integer between 1 and 5, inclusive.
-# Each time the user guesses, they are immediately informed whether they guessed correctly or not, with the printed output, "Correct!" or "Wrong!"
-# If at any time, the user enters an invalid response, the program immediately prints out the text, "Invalid response!" and does not print out anything further.
-# At the end, the function, assuming the user has entered all valid guesses, the program prints out the percent of guesses that user guessed correctly, following the format: "You guessed 75% of the random numbers correctly."
+        if guess_result == -1:
+            print("Invalid response!")
+            return
+        elif guess_result:
+            print("Correct!")
+            correct_guesses += 1
+        else:
+            print("Wrong!")
 
+    success_rate = (correct_guesses / num_guesses) * 100
+    print(f"You guessed {success_rate}% of the random numbers correctly.")
