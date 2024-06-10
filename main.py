@@ -6,7 +6,8 @@ Feel free to comment out any of it in order to focus only on the functions you a
 
 from problem_set_1 import *
 from problem_set_2 import *
-from problem_set_3 import *
+from problem_set_3 import get_guess, get_random_int, play_game
+#from problem_set_3 import *
 
 def main():
   """
@@ -19,6 +20,9 @@ def main():
   bark_with_validation()
   respond_to_anything()
   respond_to_anything_but_nonsense()
-
+  weather_helper()
+  get_random_int(min_val=, max_val=)
+  get_guess(max_val=)
+  play_game()
 # call the main function
 main()

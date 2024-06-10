@@ -59,4 +59,3 @@ def weather_helper():
             print("Stay cool indoors.")
         else:
             print("I hope you have a fan.")
-
